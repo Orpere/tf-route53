@@ -1,3 +1,4 @@
+# Route 53
 
 - [x] Install [tfswitch](https://warrensbox.github.io/terraform-switcher/) and chose terraform 11
 - [x] Install [git](https://gist.github.com/derhuerst/1b15ff4652a867391f03)
@@ -18,7 +19,7 @@ cd tf-route53.git
 ```
 
 - use tfswitch to change the version of terraform:
-  - this repo uses versions 0. 11.14 and 0.11.11
+  - this repo uses versions 0.11.14 and 0.11.11
 
 ```bash
 Use the arrow keys to navigate: ↓ ↑ → ← 
@@ -43,7 +44,7 @@ Switched terraform to version "0.11.11"
 
 ```terraform
   provider "aws" {
-  version = "~>  1.52"
+  version = "=  1.52"
   region  = "${var.region}"
 }
 
@@ -54,7 +55,7 @@ Switched terraform to version "0.11.11"
 ```terraform
 Initializing provider plugins...
 - Checking for available provider plugins on https://releases.hashicorp.com...
-- Downloading plugin for provider "aws" (1.60.0)...
+- Downloading plugin for provider "aws" (1.52.0)...
 
 Terraform has been successfully initialized!
 
@@ -131,21 +132,9 @@ aws_route53_zone.primary: Creating...
   vpc_region:     "" => "<computed>"
   zone_id:        "" => "<computed>"
 aws_route53_zone.primary: Still creating... (10s elapsed)
-aws_route53_zone.primary: Still creating... (20s elapsed)
-aws_route53_zone.primary: Still creating... (30s elapsed)
-aws_route53_zone.primary: Creation complete after 35s (ID: Z2PFN3FLD3KV3P)
-aws_route53_record.www-dev: Creating...
-  allow_overwrite:                  "" => "true"
-  fqdn:                             "" => "<computed>"
-  name:                             "" => "www"
-  records.#:                        "" => "1"
-  records.458952201:                "" => "dev.example.xt"
-  set_identifier:                   "" => "dev"
-  ttl:                              "" => "5"
-  type:                             "" => "CNAME"
-  weighted_routing_policy.#:        "" => "1"
-  weighted_routing_policy.0.weight: "" => "10"
-  zone_id:                          "" => "Z2PFN3FLD3KV3P"
+aws_route53_zone.primary: Still creating... (21s elapsed)
+aws_route53_zone.primary: Still creating... (31s elapsed)
+aws_route53_zone.primary: Creation complete after 33s (ID: Z2E3MYPADIIPTS)
 aws_route53_record.www-live: Creating...
   allow_overwrite:                  "" => "true"
   fqdn:                             "" => "<computed>"
@@ -157,15 +146,27 @@ aws_route53_record.www-live: Creating...
   type:                             "" => "CNAME"
   weighted_routing_policy.#:        "" => "1"
   weighted_routing_policy.0.weight: "" => "90"
-  zone_id:                          "" => "Z2PFN3FLD3KV3P"
+  zone_id:                          "" => "Z2E3MYPADIIPTS"
+aws_route53_record.www-dev: Creating...
+  allow_overwrite:                  "" => "true"
+  fqdn:                             "" => "<computed>"
+  name:                             "" => "www"
+  records.#:                        "" => "1"
+  records.458952201:                "" => "dev.example.xt"
+  set_identifier:                   "" => "dev"
+  ttl:                              "" => "5"
+  type:                             "" => "CNAME"
+  weighted_routing_policy.#:        "" => "1"
+  weighted_routing_policy.0.weight: "" => "10"
+  zone_id:                          "" => "Z2E3MYPADIIPTS"
 aws_route53_record.www-dev: Still creating... (10s elapsed)
 aws_route53_record.www-live: Still creating... (10s elapsed)
-aws_route53_record.www-dev: Still creating... (20s elapsed)
 aws_route53_record.www-live: Still creating... (20s elapsed)
-aws_route53_record.www-live: Still creating... (30s elapsed)
+aws_route53_record.www-dev: Still creating... (20s elapsed)
 aws_route53_record.www-dev: Still creating... (30s elapsed)
-aws_route53_record.www-dev: Creation complete after 39s (ID: Z2PFN3FLD3KV3P_www_CNAME_dev)
-aws_route53_record.www-live: Creation complete after 39s (ID: Z2PFN3FLD3KV3P_www_CNAME_live)
+aws_route53_record.www-live: Still creating... (30s elapsed)
+aws_route53_record.www-live: Creation complete after 38s (ID: Z2E3MYPADIIPTS_www_CNAME_live)
+aws_route53_record.www-dev: Creation complete after 38s (ID: Z2E3MYPADIIPTS_www_CNAME_dev)
 
 Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
 ```
@@ -181,7 +182,7 @@ Switched terraform to version "0.11.14"
 
 ```terraform
   provider "aws" {
-  version = "~>  2.38"
+  version = "=  2.38"
   region  = "${var.region}"
 }
 
@@ -190,11 +191,11 @@ Switched terraform to version "0.11.14"
 6) terraform init && terraform apply
 
 ```terraform
-terraform init
+ terraform init
 
 Initializing provider plugins...
 - Checking for available provider plugins on https://releases.hashicorp.com...
-- Downloading plugin for provider "aws" (2.42.0)...
+- Downloading plugin for provider "aws" (2.38.0)...
 
 Terraform has been successfully initialized!
 
@@ -205,11 +206,10 @@ should now work.
 If you ever set or change modules or backend configuration for Terraform,
 rerun this command to reinitialize your working directory. If you forget, other
 commands will detect it and remind you to do so if necessary.
-
 ➜  route53 git:(master) ✗ terraform apply
-aws_route53_zone.primary: Refreshing state... (ID: Z2PFN3FLD3KV3P)
-aws_route53_record.www-dev: Refreshing state... (ID: Z2PFN3FLD3KV3P_www_CNAME_dev)
-aws_route53_record.www-live: Refreshing state... (ID: Z2PFN3FLD3KV3P_www_CNAME_live)
+aws_route53_zone.primary: Refreshing state... (ID: Z2E3MYPADIIPTS)
+aws_route53_record.www-live: Refreshing state... (ID: Z2E3MYPADIIPTS_www_CNAME_live)
+aws_route53_record.www-dev: Refreshing state... (ID: Z2E3MYPADIIPTS_www_CNAME_dev)
 
 Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
 ```
@@ -217,10 +217,10 @@ Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
 7) terraform destroy
 
 ```terraform
-➜  route53 git:(master) ✗ terraform destroy
-aws_route53_zone.primary: Refreshing state... (ID: Z2PFN3FLD3KV3P)
-aws_route53_record.www-dev: Refreshing state... (ID: Z2PFN3FLD3KV3P_www_CNAME_dev)
-aws_route53_record.www-live: Refreshing state... (ID: Z2PFN3FLD3KV3P_www_CNAME_live)
+terraform destroy
+aws_route53_zone.primary: Refreshing state... (ID: Z2E3MYPADIIPTS)
+aws_route53_record.www-live: Refreshing state... (ID: Z2E3MYPADIIPTS_www_CNAME_live)
+aws_route53_record.www-dev: Refreshing state... (ID: Z2E3MYPADIIPTS_www_CNAME_dev)
 
 An execution plan has been generated and is shown below.
 Resource actions are indicated with the following symbols:
@@ -243,19 +243,19 @@ Do you really want to destroy all resources?
 
   Enter a value: yes
 
-
-aws_route53_record.www-live: Destroying... (ID: Z2PFN3FLD3KV3P_www_CNAME_live)
-aws_route53_record.www-dev: Destroying... (ID: Z2PFN3FLD3KV3P_www_CNAME_dev)
-aws_route53_record.www-live: Still destroying... (ID: Z2PFN3FLD3KV3P_www_CNAME_live, 10s elapsed)
-aws_route53_record.www-dev: Still destroying... (ID: Z2PFN3FLD3KV3P_www_CNAME_dev, 10s elapsed)
-aws_route53_record.www-dev: Still destroying... (ID: Z2PFN3FLD3KV3P_www_CNAME_dev, 20s elapsed)
-aws_route53_record.www-live: Still destroying... (ID: Z2PFN3FLD3KV3P_www_CNAME_live, 20s elapsed)
-aws_route53_record.www-dev: Still destroying... (ID: Z2PFN3FLD3KV3P_www_CNAME_dev, 30s elapsed)
-aws_route53_record.www-live: Still destroying... (ID: Z2PFN3FLD3KV3P_www_CNAME_live, 30s elapsed)
+aws_route53_record.www-live: Destroying... (ID: Z2E3MYPADIIPTS_www_CNAME_live)
+aws_route53_record.www-dev: Destroying... (ID: Z2E3MYPADIIPTS_www_CNAME_dev)
+aws_route53_record.www-live: Still destroying... (ID: Z2E3MYPADIIPTS_www_CNAME_live, 10s elapsed)
+aws_route53_record.www-dev: Still destroying... (ID: Z2E3MYPADIIPTS_www_CNAME_dev, 10s elapsed)
+aws_route53_record.www-dev: Still destroying... (ID: Z2E3MYPADIIPTS_www_CNAME_dev, 20s elapsed)
+aws_route53_record.www-live: Still destroying... (ID: Z2E3MYPADIIPTS_www_CNAME_live, 20s elapsed)
+aws_route53_record.www-live: Still destroying... (ID: Z2E3MYPADIIPTS_www_CNAME_live, 30s elapsed)
+aws_route53_record.www-dev: Still destroying... (ID: Z2E3MYPADIIPTS_www_CNAME_dev, 30s elapsed)
 aws_route53_record.www-dev: Destruction complete after 38s
-aws_route53_record.www-live: Destruction complete after 39s
-aws_route53_zone.primary: Destroying... (ID: Z2PFN3FLD3KV3P)
-aws_route53_zone.primary: Destruction complete after 0s
+aws_route53_record.www-live: Destruction complete after 38s
+aws_route53_zone.primary: Destroying... (ID: Z2E3MYPADIIPTS)
+aws_route53_zone.primary: Destruction complete after 1s
 
 Destroy complete! Resources: 3 destroyed.
+
 ```
